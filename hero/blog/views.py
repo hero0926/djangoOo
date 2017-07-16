@@ -1,10 +1,40 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Post
+from django.db.models import Q
+
 # Create your views here.
 
 # view 화면 연결
 def post_list(request) :
-    return render(request, "blog/post_list.html")
+
+    qs = Post.objects.all()
+    
+    # 쿼리에 해당하는 값 없을 시엔 ''공백 리턴
+
+    query = request.GET.get('query', '')
+    type = request.GET.get('type', '')
+
+    #값이 있으면
+    
+    if query :
+        #title__icontains -> 제목에 검색어가 있는 것만 필터링
+        #컬럼명__icontains
+
+
+        if type == 'title' :
+            qs = qs.filter(title__icontains=query)
+        elif type == 'subject' :
+            qs = qs.filter(content__icontains=query)
+        else :
+            qs = qs.filter(Q(title__icontains=query) | Q(content__icontains=query))
+
+    return render(request, "blog/post_list.html", {
+        
+        #post_list 값으로 qs 보내줌
+        'post_list' : qs,
+        'query' : query
+    })
 
 
 def mysum(request, numbers) :
