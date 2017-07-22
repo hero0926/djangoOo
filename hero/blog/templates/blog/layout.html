@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Django Blog</title>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+<div>
+    <h1>BLOG</h1>
+    <hr>
+
+    {% block content %}
+    {% endblock %}
+
+    <hr>
+
+    &copy; 2017 HERO. All rights reserved.
+
+</div>
+</body>
+</html>

@@ -1,3 +1,4 @@
+
 from django.conf.urls import url
 # . 현재 디렉토리에서 import
 from . import views
@@ -10,7 +11,7 @@ from . import views
 #
 urlpatterns = [
 
-    url(r'^$', views.post_list),
+    url(r'^$', views.post_list, name="post_list"),
     # url(r'^sum/(?P<x>\d+)/$', views.mysum),
     # sum / 으로 시작해서 (?P 만약 \d에 맞으면 <x> x라는 인자로 return 할게.)
     # url(r'^sum/(?P<x>\d+)/(?P<y>\d+)/$', views.mysum),
@@ -22,6 +23,8 @@ urlpatterns = [
 
     # /hello/한글이름/나이/
     url(r'^hello/(?P<name>[ㄱ-힣]+)/(?P<age>\d+)/$', views.myurl),
+
+    url(r'^(?P<pk>\d+)/$', views.post_detail, name="post_detail"),
 
 
 ]

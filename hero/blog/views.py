@@ -29,6 +29,8 @@ def post_list(request) :
         else :
             qs = qs.filter(Q(title__icontains=query) | Q(content__icontains=query))
 
+# html 파일 앞 디렉토리를 줘서 충돌을 막음
+
     return render(request, "blog/post_list.html", {
         
         #post_list 값으로 qs 보내줌
@@ -58,3 +60,13 @@ def mysum(request, numbers) :
 def myurl(request, name, age) :
 
     return HttpResponse("안녕하세요, "+name+". "+age+"살이네요.")
+
+
+def post_detail(request, pk) :
+
+    post = Post.objects.get(pk=pk)
+
+    return render(request, 'blog/post_detail.html', {
+
+        'post' : post,
+    })

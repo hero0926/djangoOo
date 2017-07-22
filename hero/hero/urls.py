@@ -20,7 +20,7 @@ from django.conf import settings
 # 내 프로젝트 안 어쩌구 /xxx/mypage.hero 에서 xxx 쪽을 연결 <- 이거용어가 기억이안남
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^blog/', include('blog.urls')),
+    url(r'^weblog/', include('blog.urls', namespace="blog")),
 ]
 
 

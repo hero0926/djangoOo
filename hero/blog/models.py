@@ -1,4 +1,6 @@
 from django.db import models
+import os
+import uuid;
 
 # Create your models here.
 
@@ -21,3 +23,11 @@ class Post(models.Model) :
     def __str__(self):
         # 제목을 리턴
         return self.title
+
+def random_upload_to(instance, orig_filename) :
+
+    ext = os.path.splitext(orig_filename)[-1].lower()
+    filename = uuid.uuid4().hex + ext
+    filepath = os.path.join(filename[:3], filename[3:6], filename[6:9], filename[9:])
+
+    return filepath
