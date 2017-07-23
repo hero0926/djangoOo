@@ -21,6 +21,8 @@ from django.conf import settings
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^weblog/', include('blog.urls', namespace="blog")),
+
+    url(r'^shop/', include('shop.urls', namespace="shop")),
 ]
 
 

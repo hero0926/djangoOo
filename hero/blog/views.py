@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Post
 from django.db.models import Q
+from django.shortcuts import redirect, render
+from .forms import PostForm
 
 # Create your views here.
 
@@ -69,4 +71,61 @@ def post_detail(request, pk) :
     return render(request, 'blog/post_detail.html', {
 
         'post' : post,
+    })
+
+
+def post_new(request):
+     if request.method == 'POST':
+        # request.GET
+        # request.POST  # POST인자, 파일 제외
+         # request.FILES  # POST인자, 파일만
+         form = PostForm(request.POST)
+         if form.is_valid():
+             # form.cleaned_data  # {'title': ??, 'author': ??}
+             post = form.save()
+             return redirect(post) # post.get_absolute_url()로 이동
+         #else:
+         #    form.errors
+     else:
+         # if request.method == 'GET':
+         form = PostForm()
+     return render(request, 'blog/post_form.html', {
+         'form': form,
+     })
+
+def post_edit(request, pk):
+    post = Post.objects.get(pk=pk)
+
+    if request.method == 'POST':
+            # request.GET
+        # request.POST  # POST인자, 파일 제외
+        # request.FILES  # POST인자, 파일만
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            # form.cleaned_data  # {'title': ??, 'author': ??}
+            post = form.save()
+            return redirect('blog:post_detail', post.id)
+        #else:
+        #    form.errors
+    else:
+        # if request.method == 'GET':
+        form = PostForm(instance=post)
+
+    return render(request, 'blog/post_form.html', {
+        'form': form,
+    })
+
+
+def post_delete(request, pk) :
+
+    post = Post.objects.get(pk=pk)
+
+
+    if request.method == "POST" :
+        post.delete()
+        return redirect("blog:post_list")
+
+    return render(request, "blog/post_confirm_delete.html", {
+        "post" :post,
+
     })

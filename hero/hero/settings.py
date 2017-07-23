@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog', #내앱이름
+    'shop',
     'debug_toolbar', #  장고 디버그 툴바 설치
     'bootstrap3', #bootstrap
 ]

@@ -1,0 +1,23 @@
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-sm-8 col-sm-offset-2">
+
+<form action="" method="post">
+    <!-- action = "" 일 때, 현재 페이지를 가리킴 -->
+    {% csrf_token %}
+    <table>
+        {% bootstrap_form form %}
+
+    </table>
+
+    <input type="submit" value="저장하기"/>
+</form>
+        </div>
+    </div>
+</div>
