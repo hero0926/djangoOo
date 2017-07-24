@@ -1,4 +1,4 @@
-"""hero URL Configuration
+"""accounts URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
@@ -13,29 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
+from django.conf.urls import url
 from django.contrib import admin
-from django.conf import settings
 
-# 내 프로젝트 안 어쩌구 /xxx/mypage.hero 에서 xxx 쪽을 연결 <- 이거용어가 기억이안남
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^weblog/', include('blog.urls', namespace="blog")),
-
-    url(r'^shop/', include('shop.urls', namespace="shop")),
-
-    # accounts 내에서는 namespace를 따로 저장하지 않았음
-
-    url(r'^accounts/', include('accounts.urls')),
-]
-
-
-# 디버그 툴바
-
-if settings.DEBUG:
-    import debug_toolbar
-
-# 디버그 설정되어 있으면 디버그 모드 설정
-urlpatterns += [
-    url(r'^__debug__/', include(debug_toolbar.urls)),
 ]
